@@ -6,7 +6,7 @@
 #define I2S_BCK       GPIO_NUM_26
 #define I2S_WS        GPIO_NUM_25
 #define I2S_DATA_OUT  GPIO_NUM_22
-#define I2S_DATA_IN   I2S_PIN_NO_CHANGE
+#define I2S_DATA_IN   GPIO_NUM_21 // I2S_PIN_NO_CHANGE // will not be used
 #define CAN_TX        GPIO_NUM_5
 #define CAN_RX        GPIO_NUM_4
 
@@ -36,7 +36,7 @@ void setup() {
   ESP32Can.CANInit();
   
   // a2dp setup
-  i2s_pin_config_t my_pin_config = {
+  i2s_pin_config_t my_pin_config = { // https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/i2s.html
     .bck_io_num = I2S_BCK, 
     .ws_io_num = I2S_WS,
     .data_out_num = I2S_DATA_OUT,
