@@ -20,7 +20,7 @@ bool OnCooldown = false;
 
 // temp
 TaskHandle_t T_HandleTemprature;
-extern uint8_t temprature_sens_read();
+extern "C" uint8_t temprature_sens_read();
 #define TEMP (temprature_sens_read() - 32) / 1.8 // convert to °C
 #define MAXTEMP 100
 
