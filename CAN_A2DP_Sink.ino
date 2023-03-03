@@ -12,29 +12,26 @@
 
 // a2dp
 BluetoothA2DPSink a2dp_sink;
-const uint8_t myBLDevice = 0xACD6181CED4C;
+#define ENABLE_A2DP
 
 // can
 CAN_device_t CAN_cfg;
 bool OnCooldown = false;
-
-// temp
-TaskHandle_t T_HandleTemprature;
-extern "C" uint8_t temprature_sens_read();
-#define TEMP (temprature_sens_read() - 32) / 1.8 // convert to °C
-#define MAXTEMP 100
+#define ENABLE_CAN
 
 void setup() {
-  // temp
-  // xTaskCreate(HandleTemprature, "Handle Temprature", 1024, NULL, 0, &T_HandleTemprature); // TODO
+  Serial.begin(9600);
 
   // can setup
+#ifdef ENABLE_CAN
   CAN_cfg.speed = CAN_SPEED_100KBPS; // https://bimmerguide.de/bmw-bus-systeme/ K-CAN
   CAN_cfg.tx_pin_id = CAN_TX;
   CAN_cfg.rx_pin_id = CAN_RX;
   CAN_cfg.rx_queue = xQueueCreate(10, sizeof(CAN_frame_t));
   ESP32Can.CANInit();
-  
+#endif 
+
+#ifdef ENABLE_A2DP
   // a2dp setup
   i2s_pin_config_t my_pin_config = { // https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/i2s.html
     .bck_io_num = I2S_BCK, 
@@ -43,19 +40,20 @@ void setup() {
     .data_in_num = I2S_DATA_IN
   };
   a2dp_sink.set_pin_config(my_pin_config);
-  a2dp_sink.set_task_core(2);
+  a2dp_sink.set_task_core(1);
   a2dp_sink.start("E87");
-  
-  if (a2dp_sink.connect_to((uint8_t*) myBLDevice)) {
-    a2dp_sink.set_volume(255); // volume to max
-  }
+
+#endif
 }
 
 void loop() {
+#ifdef ENABLE_CAN
   CAN_frame_t rx_frame;
   
+  Serial.print("Waiting on Frame: ");
   if(xQueueReceive(CAN_cfg.rx_queue, &rx_frame, 3 * portTICK_PERIOD_MS)) {
-
+    Serial.println("found!");
+    
     if (!a2dp_sink.is_connected())
       return;
 
@@ -72,25 +70,29 @@ void loop() {
       if (rx_frame.data.u8[0] == 0xC0 and rx_frame.data.u8[1] == 0x0C) { // continues Ping; nothing is pressed
         OnCooldown = false;
       } else if (rx_frame.data.u8[0] == 0xE0 and rx_frame.data.u8[1] == 0x0C) { // up button
+#ifdef ENABLE_A2DP
         a2dp_sink.next();
+#endif
         OnCooldown = true;
       } else if (rx_frame.data.u8[0] == 0xD0 and rx_frame.data.u8[1] == 0x0C) { // down button
+#ifdef ENABLE_A2DP
         a2dp_sink.previous();
+#endif
         OnCooldown = true;
       } else if (rx_frame.data.u8[0] == 0xC0 and rx_frame.data.u8[1] == 0x0D) { // voice button
+#ifdef ENABLE_A2DP
         a2dp_sink.play();
+#endif
         OnCooldown = true;
       } else if (rx_frame.data.u8[0] == 0xC1 and rx_frame.data.u8[1] == 0x0C) { // telephone button
+#ifdef ENABLE_A2DP
         a2dp_sink.pause();
+#endif
         OnCooldown = true;
       }
     }
+  } else {
+    Serial.println("not found!");
   }
-}
-
-void HandleTemprature() {
-  if (TEMP >= MAXTEMP) {
-    a2dp_sink.disconnect();
-    esp_deep_sleep_start();
-  }
+#endif
 }
