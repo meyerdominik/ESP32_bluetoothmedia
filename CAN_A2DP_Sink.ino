@@ -17,6 +17,7 @@ BluetoothA2DPSink a2dp_sink;
 // can
 CAN_device_t CAN_cfg;
 bool OnCooldown = false;
+#define CAN_SPEED CAN_SPEED_100KBPS // K-CAN: https://bimmerguide.de/bmw-bus-systeme/
 #define ENABLE_CAN
 
 void setup() {
@@ -24,15 +25,17 @@ void setup() {
 
   // can setup
 #ifdef ENABLE_CAN
-  CAN_cfg.speed = CAN_SPEED_100KBPS; // https://bimmerguide.de/bmw-bus-systeme/ K-CAN
+  Serial.println("Booting CAN");
+  CAN_cfg.speed = CAN_SPEED;
   CAN_cfg.tx_pin_id = CAN_TX;
   CAN_cfg.rx_pin_id = CAN_RX;
   CAN_cfg.rx_queue = xQueueCreate(10, sizeof(CAN_frame_t));
   ESP32Can.CANInit();
 #endif 
 
-#ifdef ENABLE_A2DP
   // a2dp setup
+#ifdef ENABLE_A2DP
+  Serial.println("Booting A2DP");
   i2s_pin_config_t my_pin_config = { // https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/i2s.html
     .bck_io_num = I2S_BCK, 
     .ws_io_num = I2S_WS,
@@ -42,8 +45,9 @@ void setup() {
   a2dp_sink.set_pin_config(my_pin_config);
   a2dp_sink.set_task_core(1);
   a2dp_sink.start("E87");
-
 #endif
+
+Serial.println("Boot ok");
 }
 
 void loop() {
