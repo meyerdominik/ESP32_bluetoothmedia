@@ -93,7 +93,7 @@ void loop() {
     Serial.print(", len: ");
     Serial.print(frame.len);
     Serial.print(", data: 0x");
-    for(int i = 0; i < frame.len; i++) {
+    for (int i = 0; i < frame.len; i++) {
       Serial.print(frame.data[i], HEX);
     }
     Serial.println("");
