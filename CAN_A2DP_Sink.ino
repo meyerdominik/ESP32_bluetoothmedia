@@ -16,6 +16,7 @@
 
 // a2dp
 BluetoothA2DPSink a2dp_sink;
+#define A2DP_SINK_NAME "E87"
 #define ENABLE_A2DP
 
 // can
@@ -25,6 +26,9 @@ bool OnCooldown = false;
 #ifdef ENABLE_CAN
 // #define DEBUG_CAN
 #endif
+
+// general
+bool bBootOK = true;
 
 void setup() {
   Serial.begin(9600);
@@ -44,6 +48,7 @@ void setup() {
   if (errorCode == 0) {
     Serial.println ("CAN ok") ;
   } else {
+    bBootOK = false;
     Serial.print ("Error Can: 0x") ;
     Serial.println (errorCode, HEX) ;
   }
@@ -53,25 +58,33 @@ void setup() {
   // a2dp setup
 #ifdef ENABLE_A2DP
   Serial.println("Booting A2DP");
-  i2s_pin_config_t my_pin_config = { // https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/i2s.html
+  i2s_pin_config_t pin_config = { // https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/i2s.html
     .bck_io_num = I2S_BCK, 
     .ws_io_num = I2S_WS,
     .data_out_num = I2S_DATA_OUT,
     .data_in_num = I2S_DATA_IN
   };
-  a2dp_sink.set_pin_config(my_pin_config);
+  a2dp_sink.set_pin_config(pin_config);
   a2dp_sink.set_task_core(1);
-  a2dp_sink.start("E87");
+  a2dp_sink.start(A2DP_SINK_NAME);
 #endif
 
-Serial.println("Boot ok");
+  if (bBootOK)
+    Serial.println("Boot ok");
+  else {
+    Serial.println("Boot not ok");
+    esp_deep_sleep_start();
+  }
 }
 
 void loop() {
+  if (!bBootOK)
+    return;
+
 #ifdef ENABLE_CAN
   CANMessage frame;
   
-  if(ACAN_ESP32::can.receive(frame)) {
+  if (ACAN_ESP32::can.receive(frame)) {
 
 #ifdef DEBUG_CAN
     // Print frame
