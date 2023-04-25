@@ -29,3 +29,6 @@ Wireing:
 * ESP USC     -> Power source
 
 Remember to short the pins on the can transceiver, if you don't need the 120 Ω resistor as an endpoint.
+
+Ideas for your own implementation:
+* a2dp can receive information about the song that is currently playing. You could attach a display to show the current artist and title.
