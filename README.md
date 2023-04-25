@@ -1,5 +1,5 @@
 # ESP32_bluetoothmedia
-ESP32 BMW A2DP Sink K_CAN
+An esp32 used as a2dp sink attached to the bmw canbus for steering wheel controls
 
 Imported libs:
 * https://github.com/pschatzmann/ESP32-A2DP
