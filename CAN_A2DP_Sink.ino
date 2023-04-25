@@ -46,11 +46,11 @@ void setup() {
 
 #ifdef DEBUG_CAN
   if (errorCode == 0) {
-    Serial.println ("CAN ok");
+    Serial.println("CAN ok");
   } else {
     bBootOK = false;
-    Serial.print ("Error Can: 0x");
-    Serial.println (errorCode, HEX);
+    Serial.print("Error Can: 0x");
+    Serial.println(errorCode, HEX);
   }
 #endif
 #endif 
@@ -61,9 +61,9 @@ void setup() {
   static i2s_config_t i2s_config = { // https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/i2s.html
         .mode = (i2s_mode_t) (I2S_MODE_MASTER | I2S_MODE_TX),
         .sample_rate = 44100, // updated automatically by A2DP
-        .bits_per_sample = (i2s_bits_per_sample_t)32,
+        .bits_per_sample = (i2s_bits_per_sample_t) 32,
         .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
-        .communication_format = (i2s_comm_format_t) (I2S_COMM_FORMAT_STAND_I2S),
+        .communication_format = (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S,
         .intr_alloc_flags = 0, // default interrupt priority
         .dma_buf_count = 8,
         .dma_buf_len = 64,
