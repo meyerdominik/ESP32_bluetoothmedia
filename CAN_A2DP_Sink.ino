@@ -24,7 +24,7 @@ bool OnCooldown = false;
 #define CAN_SPEED 100000 // K-CAN: https://bimmerguide.de/bmw-bus-systeme/
 #define ENABLE_CAN
 #ifdef ENABLE_CAN
-#define DEBUG_CAN
+// #define DEBUG_CAN
 #endif
 
 // general
