@@ -28,4 +28,4 @@ Wireing:
 * DAC XMT     -> ESP 3.3V
 * ESP USC     -> Power source
 
-Remember to short the pins on the can transceiver, if you don't need the 120 Ohms resistor as an endpoint.
+Remember to short the pins on the can transceiver, if you don't need the 120 Ω resistor as an endpoint.
