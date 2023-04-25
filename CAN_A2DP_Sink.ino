@@ -37,7 +37,7 @@ void setup() {
 #ifdef ENABLE_CAN
   Serial.println("Booting CAN");
 
-  ACAN_ESP32_Settings settings (CAN_SPEED);
+  ACAN_ESP32_Settings settings(CAN_SPEED);
   settings.mRequestedCANMode = ACAN_ESP32_Settings::ListenOnlyMode;
   settings.mRxPin = CAN_RX;
   settings.mTxPin = CAN_TX;
@@ -46,11 +46,11 @@ void setup() {
 
 #ifdef DEBUG_CAN
   if (errorCode == 0) {
-    Serial.println ("CAN ok") ;
+    Serial.println ("CAN ok");
   } else {
     bBootOK = false;
-    Serial.print ("Error Can: 0x") ;
-    Serial.println (errorCode, HEX) ;
+    Serial.print ("Error Can: 0x");
+    Serial.println (errorCode, HEX);
   }
 #endif
 #endif 
