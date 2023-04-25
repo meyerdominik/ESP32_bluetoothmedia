@@ -1,17 +1,17 @@
 # ESP32_bluetoothmedia
 An esp32 used as a2dp sink attached to the bmw canbus for steering wheel controls
 
-Imported libs:
+## Imported libs
 * https://github.com/pschatzmann/ESP32-A2DP
 * [https://github.com/nhatuan84/esp32-can-protocol-demo](https://github.com/pierremolinaro/acan-esp32)
 
-Used parts:
+## Used parts
 * ESP32: https://de.aliexpress.com/item/33004561102.html
 * External DAC: https://de.aliexpress.com/item/1005004491534008.html
 * CAN transceiver: https://de.aliexpress.com/item/1005002844175352.html
 * AUX pinout adapter (not really necessary, since the external DAC has output pins to attatch to): https://www.amazon.de/gp/product/B009PH1IG4
 
-Wireing:
+## Wireing
 * CAN 3.3V    -> ESP 3.3V
 * CAN Ground  -> ESP Ground
 * CAN RX      -> ESP pin D4 (GPIO 4)
@@ -28,7 +28,13 @@ Wireing:
 * DAC XMT     -> ESP 3.3V
 * ESP USC     -> Power source
 
-Remember to short the pins on the can transceiver, if you don't need the 120 Ω resistor as an endpoint.
+**Remember to short the pins on the can transceiver, if you don't need the 120 Ω resistor as an endpoint.**
 
-Ideas for your own implementation:
+## Features
+* Automatic reconnect to the last connected device is handled by the ESP32-A2DP-library
+
+## Todo (maybe?)
+* Set volume automatically to the maximum
+
+## Ideas for your own implementation:
 * a2dp can receive information about the song that is currently playing. You could attach a display to show the current artist and title.
