@@ -9,7 +9,7 @@ Used parts:
 * ESP32: https://de.aliexpress.com/item/33004561102.html
 * External DAC: https://de.aliexpress.com/item/1005004491534008.html
 * CAN transceiver: https://de.aliexpress.com/item/1005002844175352.html
-* AUX pinout adapter (not really neccecery since the external DAC has output pins to attatch to): https://www.amazon.de/gp/product/B009PH1IG4
+* AUX pinout adapter (not really necessary since the external DAC has output pins to attatch to): https://www.amazon.de/gp/product/B009PH1IG4
 
 Wireing:
 * CAN 3.3V    -> ESP 3.3V
