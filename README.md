@@ -26,7 +26,7 @@ An esp32 used as a2dp sink attached to the bmw canbus for steering wheel control
 * DAC LCK     -> ESP pin D25 (GPIO 25)
 * DAC FMT     -> ESP Ground
 * DAC XMT     -> ESP 3.3V
-* ESP USC     -> Power source
+* ESP USB-C   -> Power source
 
 **Remember to short the pins on the can transceiver, if you don't need the 120 Ω resistor as an endpoint.**
 
