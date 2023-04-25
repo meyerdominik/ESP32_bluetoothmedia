@@ -14,16 +14,16 @@ Used parts:
 Wireing:
 * CAN 3.3V    -> ESP 3.3V
 * CAN Ground  -> ESP Ground
-* CAN RX      -> ESP pin 4
-* CAN TX      -> ESP pin 5
+* CAN RX      -> ESP pin D4 (GPIO 4)
+* CAN TX      -> ESP pin D5 (GPIO 5)
 * DAC 3.3V    -> ESP 3.3V
 * DAC Ground  -> ESP Ground
 * DAC FLT     -> ESP Ground
 * DAC DMP     -> ESP Ground
 * DAC SLC     -> ESP Ground
-* DAC BCK     -> ESP pin 26
-* DAC DIN     -> ESP pin 23
-* DAC LCK     -> ESP pin 25
+* DAC BCK     -> ESP pin D26 (GPIO 26)
+* DAC DIN     -> ESP pin D22 (GPIO 22)
+* DAC LCK     -> ESP pin D25 (GPIO 25)
 * DAC FMT     -> ESP Ground
 * DAC XMT     -> ESP 3.3V
 * ESP USC     -> Power source
