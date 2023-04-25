@@ -33,7 +33,7 @@ An esp32 used as a2dp sink attached to the bmw canbus for steering wheel control
 ## Features
 * Automatic reconnect to the last connected device is handled by the ESP32-A2DP-library
 
-## Todo (maybe?)
+## Todos (maybe?)
 * Set volume automatically to the maximum
 
 ## Ideas for your own implementation:
