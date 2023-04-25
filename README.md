@@ -36,7 +36,7 @@ An esp32 used as a2dp sink attached to the bmw canbus for steering wheel control
 * Automatic reconnect to the last connected device is handled by the ESP32-A2DP-library
 
 ## Todos (maybe?)
-* Set volume automatically to the maximum
+* Set volume on bluetooth connect automatically to the maximum of the bluetooth device
 
 ## Ideas for your own implementation:
 * a2dp can receive information about the song that is currently playing. You could attach a display to show the current artist and title.
