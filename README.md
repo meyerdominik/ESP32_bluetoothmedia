@@ -11,7 +11,7 @@ An esp32 used as a2dp sink attached to the bmw canbus for steering wheel control
 * CAN transceiver: https://de.aliexpress.com/item/1005002844175352.html
 * AUX pinout adapter (not really necessary, since the external DAC has output pins to attatch to): https://www.amazon.de/gp/product/B009PH1IG4
 * DC 8V-32V to DC 5V transformer: https://www.amazon.de/gp/product/B09B818N5F
-* Random USB-C to USB-A cable
+* Random USB-A to USB-C cable
 
 ## Wireing
 * CAN 3.3V    -> ESP 3.3V
