@@ -121,24 +121,24 @@ void loop() {
       if (frame.len < 2)
         return;
 
-      if (frame.data[0] == 0xC0 and frame.data[1] == 0x0C) { // continues Ping; nothing is pressed
+      if (frame.data[0] == 0xC0 && frame.data[1] == 0x0C) { // continues Ping; nothing is pressed
         OnCooldown = false;
-      } else if (!OnCooldown && frame.data[0] == 0xE0 and frame.data[1] == 0x0C) { // up button
+      } else if (!OnCooldown && frame.data[0] == 0xE0 && frame.data[1] == 0x0C) { // up button
 #ifdef ENABLE_A2DP
         a2dp_sink.next();
 #endif
         OnCooldown = true;
-      } else if (!OnCooldown && frame.data[0] == 0xD0 and frame.data[1] == 0x0C) { // down button
+      } else if (!OnCooldown && frame.data[0] == 0xD0 && frame.data[1] == 0x0C) { // down button
 #ifdef ENABLE_A2DP
         a2dp_sink.previous();
 #endif
         OnCooldown = true;
-      } else if (!OnCooldown && frame.data[0] == 0xC0 and frame.data[1] == 0x0D) { // voice button
+      } else if (!OnCooldown && frame.data[0] == 0xC0 && frame.data[1] == 0x0D) { // voice button
 #ifdef ENABLE_A2DP
         a2dp_sink.play();
 #endif
         OnCooldown = true;
-      } else if (!OnCooldown && frame.data[0] == 0xC1 and frame.data[1] == 0x0C) { // telephone button
+      } else if (!OnCooldown && frame.data[0] == 0xC1 && frame.data[1] == 0x0C) { // telephone button
 #ifdef ENABLE_A2DP
         a2dp_sink.pause();
 #endif
